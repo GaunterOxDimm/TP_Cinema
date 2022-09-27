@@ -1,0 +1,19 @@
+{% if status is not defined %}
+<div>
+  <form action="creer_film" method='POST' >
+     Titre : <input type='text' name='titre'>
+     Realisateur : <input type='text' name='realisateur'>
+         <input type='submit' value='Ajouter'/>
+  </form>
+
+ {% else %}
+ 
+<p>{{status}} :</p>
+
+{% if creerf is defined %}
+     {{creerf.get_titre}} :
+     {{creerf.get_realisateur}}
+{% endif %}
+
+{% endif %}
+</div>

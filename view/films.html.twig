@@ -1,0 +1,16 @@
+<div>
+    {% for film in allfilms %}
+
+            {{film.get_titre}}( {{film.get_annee}} )<br><br>
+   
+           Acteurs : C'EST ICI JOINTURE POUR POUVOIR AFFICHER LES ACTEURS<br><br>
+           Le réalisateur : {{film.get_realisateur}} <br><br>
+          <img src="{{ film.get_affiche }}" alt="image film"  /> <br><br>
+     
+      
+        <input value= {{film.get_idFilm}} name ="id" type='hidden'>
+     
+
+    {% endfor %}
+</div>
+
