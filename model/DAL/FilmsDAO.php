@@ -19,7 +19,7 @@ class FilmsDAO extends Dao
     {
         //On définit la bdd pour la fonction
 
-        $query = $this->_bdd->prepare("SELECT idFilm, titre, realisateur, affiche, annee FROM films");
+        $query = $this->_bdd->prepare("SELECT * FROM role INNER JOIN films ON role.idFilm = films.idFilm INNER JOIN acteurs ON role.idActeur = acteurs.idActeur;");
         $query->execute();
         $films = array();
 
@@ -29,7 +29,7 @@ class FilmsDAO extends Dao
         return ($films);
     }
 
-    //Ajouter une offre
+    //Ajouter un film
     public function add($data)
     {
 
@@ -44,15 +44,22 @@ class FilmsDAO extends Dao
         }
     }
 
-    //Récupérer plus d'info sur 1 offre
+    //Récupérer plus d'info sur 1 film
+
     public function getOne($idFilm)
     {
-
-        $query = $this->_bdd->prepare('SELECT * FROM films WHERE films.idFilm = :idFilm')->fetch(PDO::FETCH_ASSOC);
-        $query->execute(array(':idFilm' => $idFilm));
-        $data = $query->fetch();
-        $film = new Films($data['idFilm'], $data['titre'], $data['realisateur']);
-        return ($film);
+        if ($idFilm) {
+            $query = $this->_bdd->prepare('SELECT * FROM films WHERE films.idFilm = :idFilm');
+            $query->execute(array(':idFilm' => $idFilm));
+            $data = $query->fetch();
+            $film = new Films($data['idFilm'], $data['titre'], $data['realisateur']);
+            if (!$data) {
+                $film = "Ce film n'existe pas";
+            }
+        } else {
+            $film = "ERROR";
+        }
+        return $film;
     }
 
     //supprimer une offre
@@ -61,10 +68,22 @@ class FilmsDAO extends Dao
         $query = $this->_bdd->prepare('DELETE FROM films WHERE films.idFilm = :idFilm');
         $query->execute(array(':idFilm' => $idFilm));
         $data = $query->fetch();
-        
         return ($data);
     }
 
-
-    
+    public function getImage($idFilm)
+    {
+        if ($idFilm) {
+            $image = $this->_bdd->prepare('SELECT affiche FROM films WHERE idFilm = :idFilm');
+            $image->execute(array(':idFilm' => $idFilm));
+            $data = $image->fetch();
+            $affichage = new Films($data['idFilm'], $data['affiche']);
+            if (!$data) {
+                $affichage = "Cette valeur n'éxiste pas dans la base de données";
+            }
+        } else {
+            $affichage = "ERROR";
+        }
+        return $affichage;
+    }
 }

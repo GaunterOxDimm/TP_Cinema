@@ -29,12 +29,13 @@ class UsersDAO extends Dao
         return ($user);
     }
 
-//Récupérer plus d'info sur un user
+    //Récupérer plus d'info sur un user
     public function getOne($idUser)
     {
-
         $query = $this->_bdd->prepare('SELECT * FROM user WHERE user.idUser = :idUser')->fetch(PDO::FETCH_ASSOC);
+
         $query->execute(array(':idUser' => $idUser));
+
         $data = $query->fetch();
         $user = new Users($data['idUser'], $data['userName'], $data['email'], $data['password']);
         return ($user);
@@ -43,7 +44,7 @@ class UsersDAO extends Dao
     public function add($data)
     {
 
-        $valeurs = ['userName' => $data->get_userName(), 'email' => $data->get_email ,'password' => $data->get_password()];
+        $valeurs = ['userName' => $data->get_userName(), 'email' => $data->get_email, 'password' => $data->get_password()];
         $requete = 'INSERT INTO user (userName, email, password) VALUES (:userName , :email, :password)';
         $insert = $this->_bdd->prepare($requete);
         if (!$insert->execute($valeurs)) {
@@ -53,9 +54,9 @@ class UsersDAO extends Dao
             return true;
         }
     }
-    
 
-    
+
+
 
     //supprimer un user
     public function delete($idUser)
@@ -63,10 +64,7 @@ class UsersDAO extends Dao
         $query = $this->_bdd->prepare('DELETE FROM user WHERE user.idUser = :idUser');
         $query->execute(array(':idUser' => $idUser));
         $data = $query->fetch();
-        
+
         return ($data);
     }
-
-
-    
 }

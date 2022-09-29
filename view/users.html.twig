@@ -1,26 +1,50 @@
-CONNEXION<br><br>
-
-  <form action="users" method='POST' >
-  
-  <input type='text' name='email'><br><br>
-
-    <input type='text' name='password'><br><br>
-      
-      <input type="radio" value= "remember">
-      <label for="remember">Remember me</label><br><br>
-     
-      <input type='submit' value='Sign in'/><br><br>
-      
-  </form>
-  
+  <!--************************************** FORMULAIRE DE CONNEXION *******************************-->
+{% if erreur %}
+{{ erreur }}
+{% endif %}
 
 
-  
-  <form action="creer_users" method='POST' >
-  
-      <input type='submit' value='ou créer un compte'/><br><br>
-  
-  </form>
+<form action="users" method="POST" >
+
+        <div class="card container overflow-hidden" style="width: 18rem;">
+                <div class="card-body gy-5">
+                        <h2 class="card-title ms-3">Connexion</h2>
+                        <div class="form-check">
+                                <input type="text" class="form-control mt-3" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" name="email">
+                                <input type="text" class="form-control mt-2" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password">
+                                <input class="form-check-input ms-2" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label mt-2 ms-2" for="defaultCheck1">
+                                Remember me
+                                </label>
+                        </div>
+                        <div class="row" id="connect">
+                                <div class="flexbox" id="sign-in">
+                                        <button class="btn btn-primary p-2 border bg-primary mt-3" name="submit">Sign in</button>
+                                        <p id="creer-compte">ou créer un compte</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+</form>
+
+
+
+
+
+        
+        
+   
+
+      {#  <!--   <div>{% {# for user in allusers %}</div>
+          <div>
+                  <label for="Email" style="font-weight: bold;">Email: </label> {{ user.get_email }}
+                  <label for="User" style="font-weight: bold;">User: </label> {{ user.get_username }}
+                  <label for="Password" style="font-weight: bold;">Password: </label> {{ user.get_password }}
+                  <label for="ID" style="font-weight: bold;">ID: </label> {{ user.get_idUser }}
+          </div>
+                        <div>{% endfor %}</div>
+--> #}
 
 
 

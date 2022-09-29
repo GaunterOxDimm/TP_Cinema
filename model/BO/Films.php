@@ -20,9 +20,9 @@ class Films
     private $_affiche;
     private $_annee;
     private $_roles = array();
-    
 
-    
+
+
     public function __construct($idFilm = null, $titre = null, $realisateur = null, $affiche = null, $annee = null, $roles = array())
     {
         if (!is_null($idFilm)) {
@@ -33,9 +33,11 @@ class Films
         $this->set_affiche($affiche);
         $this->set_annee($annee);
         $this->set_roles($roles);
-
     }
-
+    public function __toString()
+    {
+        return $this->_idFilm . " " . $this->_titre . " " . $this->_realisateur . " " . $this->_affiche . " " . $this->_annee . " " . $this->_roles;
+    }
     public function get_titre()
     {
         return $this->_titre;
@@ -71,12 +73,11 @@ class Films
     public function set_idFilm($_idFilm)
     {
         $this->_idFilm = $_idFilm;
-
     }
 
     /**
      * Get the value of _affiche
-     */ 
+     */
     public function get_affiche()
     {
         return $this->_affiche;
@@ -86,7 +87,7 @@ class Films
      * Set the value of _affiche
      *
      * @return  self
-     */ 
+     */
     public function set_affiche($_affiche)
     {
         $this->_affiche = $_affiche;
@@ -96,7 +97,7 @@ class Films
 
     /**
      * Get the value of _annee
-     */ 
+     */
     public function get_annee()
     {
         return $this->_annee;
@@ -106,7 +107,7 @@ class Films
      * Set the value of _annee
      *
      * @return  self
-     */ 
+     */
     public function set_annee($_annee)
     {
         $this->_annee = $_annee;
@@ -116,7 +117,7 @@ class Films
 
     /**
      * Get the value of _roles
-     */ 
+     */
     public function get_roles()
     {
         return $this->_roles;
@@ -126,7 +127,7 @@ class Films
      * Set the value of _roles
      *
      * @return  self
-     */ 
+     */
     public function set_roles($_roles)
     {
         $this->_roles = $_roles;

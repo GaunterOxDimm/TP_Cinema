@@ -27,7 +27,6 @@ class Users
         $this->set_userName($userName);
         $this->set_email($email);
         $this->set_password($password);
-        
     }
 
     public function get_userName()
@@ -65,12 +64,11 @@ class Users
     public function set_idUser($_idUser)
     {
         $this->_idUser = $_idUser;
-
     }
 
     /**
      * Get the value of _password
-     */ 
+     */
     public function get_password()
     {
         return $this->_password;
@@ -80,7 +78,7 @@ class Users
      * Set the value of _password
      *
      * @return  self
-     */ 
+     */
     public function set_password($_password)
     {
         $this->_password = $_password;
