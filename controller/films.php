@@ -8,12 +8,12 @@
 
 
 $filmsDao = new FilmsDAO();             // On instancie FilmsDAO
-// echo $twig->render('films.html.twig');  // On affiche la page du carousel à la 1ère connection
-// Tableau d'objet de toutes les infos de la bdd (jointure) - On appelle la fonction getAll()
-// print_r($allfilms);
+$acteurs = new FilmsDAO();             // On instancie FilmsDAO
+$filmsDao = new FilmsDAO();             // On instancie FilmsDAO
 
 if (isset($_POST['search'])) {         // On execute l'affichage seulement si le bouton suivant est cliqué
-    $allfilms = $filmsDao->getAll($_POST['search']);  // On affiche dans la page du carousel tous les éléments de la bdd
+    $allfilms = $filmsDao->getAll($_POST['search']);
+    var_dump($allfilms);
 } else {
     // print_r($affiches);
     $allfilms = $filmsDao->getAll("");

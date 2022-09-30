@@ -20,10 +20,11 @@ class Films
     private $_affiche;
     private $_annee;
     private $_roles = array();
+    private $_acteurs = array();
 
 
 
-    public function __construct($idFilm = null, $titre = null, $realisateur = null, $affiche = null, $annee = null, $roles = array())
+    public function __construct($idFilm = null, $titre = null, $realisateur = null, $affiche = null, $annee = null, $roles = array(), $acteurs = array())
     {
         if (!is_null($idFilm)) {
             $this->set_idFilm($idFilm);
@@ -33,10 +34,11 @@ class Films
         $this->set_affiche($affiche);
         $this->set_annee($annee);
         $this->set_roles($roles);
+        $this->set_acteurs($acteurs);
     }
     public function __toString()
     {
-        return $this->_idFilm . " " . $this->_titre . " " . $this->_realisateur . " " . $this->_affiche . " " . $this->_annee . " " . $this->_roles;
+        return $this->_idFilm . " " . $this->_titre . " " . $this->_realisateur . " " . $this->_affiche . " " . $this->_annee . " " . $this->_roles . " " . $this->_acteurs;
     }
     public function get_titre()
     {
@@ -131,6 +133,25 @@ class Films
     public function set_roles($_roles)
     {
         $this->_roles = $_roles;
+
+        return $this;
+    }
+    /**
+     * Get the value of _acteurs
+     */
+    public function get_acteurs()
+    {
+        return $this->_acteurs;
+    }
+
+    /**
+     * Set the value of _acteurs
+     *
+     * @return  self
+     */
+    public function set_acteurs($_acteurs)
+    {
+        $this->_acteurs = $_acteurs;
 
         return $this;
     }
