@@ -15,12 +15,12 @@ class FilmsDAO extends Dao
 {
 
     //Récupérer toutes les Films
-    public function getAll()
+    public function getAll($search)
     {
         //On définit la bdd pour la fonction
 
-        $query = $this->_bdd->prepare("SELECT * FROM role INNER JOIN films ON role.idFilm = films.idFilm INNER JOIN acteurs ON role.idActeur = acteurs.idActeur;");
-        $query->execute();
+        $query = $this->_bdd->prepare("SELECT * FROM role INNER JOIN films ON role.idFilm = films.idFilm INNER JOIN acteurs ON role.idActeur = acteurs.idActeur WHERE films.titre LIKE ':search'");
+        $query->execute([':search' => '%' . $search . '%']);
         $films = array();
 
         while ($data = $query->fetch()) {
@@ -28,6 +28,17 @@ class FilmsDAO extends Dao
         }
         return ($films);
     }
+    // public function getAll()
+    // {
+    //     //On définit la bdd pour la fonction
+
+    //     $query = $this->_bdd->prepare("SELECT * FROM role INNER JOIN films ON role.idFilm = films.idFilm INNER JOIN acteurs ON role.idActeur = acteurs.idActeur;");
+    //     $query->execute();
+    //     $films = array();
+
+    //     $data = $query->fetch();
+    //     return ($data);
+    // }
 
     //Ajouter un film
     public function add($data)
@@ -69,21 +80,5 @@ class FilmsDAO extends Dao
         $query->execute(array(':idFilm' => $idFilm));
         $data = $query->fetch();
         return ($data);
-    }
-
-    public function getImage($idFilm)
-    {
-        if ($idFilm) {
-            $image = $this->_bdd->prepare('SELECT affiche FROM films WHERE idFilm = :idFilm');
-            $image->execute(array(':idFilm' => $idFilm));
-            $data = $image->fetch();
-            $affichage = new Films($data['idFilm'], $data['affiche']);
-            if (!$data) {
-                $affichage = "Cette valeur n'éxiste pas dans la base de données";
-            }
-        } else {
-            $affichage = "ERROR";
-        }
-        return $affichage;
     }
 }

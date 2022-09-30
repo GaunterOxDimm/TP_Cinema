@@ -15,12 +15,11 @@ if (isset($_POST['submit'])) { // Vérifier si l'utilisateur a appuyé sur le bo
         // print_r($connexion[0]->get_email());
         for ($i = 0; $i < count($connexion); $i++) { // Boucler dans le tableau d'objets $connexion
             if ($login == $connexion[$i]->get_email()) { // Vérifier si le login entré correspond à un email dans la bdd
-                if ($pass == $connexion[$i]->get_password()) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd, de la même ligne que email
-
-                    echo $twig->render('films.html.twig'); // Si login et password ok,  afficher la page carousel films.html.twig
-                } else if ($pass != $connexion[$i]->get_password()) {
+                if ($pass != $connexion[$i]->get_password()) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd, de la même ligne que email
                     $erreur = "Erreur sur le mot de passe";
                     echo $twig->render('users.html.twig', ['erreur' => $erreur]);
+                } else if ($pass == $connexion[$i]->get_password()) {
+                    echo $twig->render('films.html.twig'); // Si login et password ok,  afficher la page carousel films.html.twig
                 }
             }
         }
