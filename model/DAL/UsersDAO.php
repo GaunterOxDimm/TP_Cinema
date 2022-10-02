@@ -15,12 +15,12 @@ class UsersDAO extends Dao
 {
 
     //Récupérer tous les Users
-    public function getAll()
+    public function getAll($search)
     {
         //On définit la bdd pour la fonction
 
-        $query = $this->_bdd->prepare("SELECT idUser, userName, email, password FROM user");
-        $query->execute();
+        $query = $this->_bdd->prepare("SELECT idUser, userName, email, password FROM user WHERE user.email = :search");
+        $query->execute(array(':search' => $search));
         $user = array();
 
         while ($data = $query->fetch()) {
@@ -30,25 +30,29 @@ class UsersDAO extends Dao
     }
 
     //Récupérer plus d'info sur un user
-    public function getOne($idUser)
+    public function getOne($email)
     {
-        $query = $this->_bdd->prepare('SELECT * FROM user WHERE user.idUser = :idUser')->fetch(PDO::FETCH_ASSOC);
-
-        $query->execute(array(':idUser' => $idUser));
+        $query = $this->_bdd->prepare('SELECT email, password FROM user WHERE user.email = :email');
+        $query->execute(array(':email' => $email));
+        $user = array();
 
         $data = $query->fetch();
-        $user = new Users($data['idUser'], $data['userName'], $data['email'], $data['password']);
+        if ($data) {
+            $user[] = new Users($data['email'], $data['password']);
+        } else {
+            $user = "requête foirée";
+        }
         return ($user);
     }
     //Ajouter un user
     public function add($data)
     {
 
-        $valeurs = ['userName' => $data->get_userName(), 'email' => $data->get_email, 'password' => $data->get_password()];
-        $requete = 'INSERT INTO user (userName, email, password) VALUES (:userName , :email, :password)';
+        $valeurs = ['idUser' => $data->get_idUser(), 'userName' => $data->get_userName(), 'email' => $data->get_email(), 'password' => $data->get_password()];
+        $requete = 'INSERT INTO user (idUser, userName, email, password) VALUES (:idUser, :userName , :email, :password)';
         $insert = $this->_bdd->prepare($requete);
         if (!$insert->execute($valeurs)) {
-            //print_r($insert->errorInfo());
+            print_r($insert->errorInfo());
             return false;
         } else {
             return true;

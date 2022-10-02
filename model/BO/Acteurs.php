@@ -26,7 +26,10 @@ class Acteurs
         $this->set_nom($nom);
         $this->set_prenom($prenom);
     }
-
+    public function __toString()
+    {
+        return $this->get_idActeur() . " " . $this->get_nom() . " " . $this->get_prenom();
+    }
     public function get_nom()
     {
         return $this->_nom;
@@ -62,6 +65,5 @@ class Acteurs
     public function set_idActeur($_idActeur)
     {
         $this->_idActeur = $_idActeur;
-
     }
 }

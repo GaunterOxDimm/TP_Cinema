@@ -29,6 +29,11 @@ class Users
         $this->set_password($password);
     }
 
+    public function __toString()
+    {
+        return $this->_idUser . " " . $this->_userName . " " . $this->_email . " " . $this->_password;
+    }
+
     public function get_userName()
     {
         return $this->_userName;

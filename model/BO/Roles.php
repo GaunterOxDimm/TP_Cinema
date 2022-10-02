@@ -26,7 +26,10 @@ class Roles
         $this->set_personnage($personnage);
         $this->set_test($test);
     }
-
+    public function __toString()
+    {
+        return $this->_idRole . " " . $this->_personnage . " " . $this->_test;
+    }
     public function get_personnage()
     {
         return $this->_personnage;
@@ -62,6 +65,5 @@ class Roles
     public function set_idRole($_idRole)
     {
         $this->_idRole = $_idRole;
-
     }
 }

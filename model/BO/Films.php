@@ -19,12 +19,12 @@ class Films
     private $_realisateur;
     private $_affiche;
     private $_annee;
-    private $_roles = array();
-    private $_acteurs = array();
+    // private $_roles = array();
+    // private $_acteurs = array();
 
 
 
-    public function __construct($idFilm = null, $titre = null, $realisateur = null, $affiche = null, $annee = null, $roles = array(), $acteurs = array())
+    public function __construct($idFilm = null, $titre = null, $realisateur = null, $affiche = null, $annee = null)
     {
         if (!is_null($idFilm)) {
             $this->set_idFilm($idFilm);
@@ -33,12 +33,12 @@ class Films
         $this->set_realisateur($realisateur);
         $this->set_affiche($affiche);
         $this->set_annee($annee);
-        $this->set_roles($roles);
-        $this->set_acteurs($acteurs);
+        // $this->set_roles($roles);
+        // $this->set_acteurs($acteurs);
     }
     public function __toString()
     {
-        return $this->_idFilm . " " . $this->_titre . " " . $this->_realisateur . " " . $this->_affiche . " " . $this->_annee . " " . $this->_roles . " " . $this->_acteurs;
+        return $this->_idFilm . " " . $this->_titre . " " . $this->_realisateur;
     }
     public function get_titre()
     {
@@ -117,42 +117,47 @@ class Films
         return $this;
     }
 
-    /**
-     * Get the value of _roles
-     */
-    public function get_roles()
-    {
-        return $this->_roles;
-    }
+    // /**
+    //  * Get the value of _roles
+    //  */
+    // public function get_roles()
+    // {
+    //     return $this->_roles;
+    // }
 
-    /**
-     * Set the value of _roles
-     *
-     * @return  self
-     */
-    public function set_roles($_roles)
-    {
-        $this->_roles = $_roles;
+    // /**
+    //  * Set the value of _roles
+    //  *
+    //  * @return  self
+    //  */
+    // public function set_roles($_roles)
+    // {
+    //     if ($_roles) {
+    //         $this->_roles = new Roles();
+    //     }
 
-        return $this;
-    }
-    /**
-     * Get the value of _acteurs
-     */
-    public function get_acteurs()
-    {
-        return $this->_acteurs;
-    }
 
-    /**
-     * Set the value of _acteurs
-     *
-     * @return  self
-     */
-    public function set_acteurs($_acteurs)
-    {
-        $this->_acteurs = $_acteurs;
+    //     return $this;
+    // }
+    // /**
+    //  * Get the value of _acteurs
+    //  */
+    // public function get_acteurs()
+    // {
+    //     return $this->_acteurs;
+    // }
 
-        return $this;
-    }
+    // /**
+    //  * Set the value of _acteurs
+    //  *
+    //  * @return  self
+    //  */
+    // public function set_acteurs($_acteurs)
+    // {
+    //     if ($_acteurs) {
+    //         $this->_acteurs = new Acteurs();
+    //     }
+
+    //     return $this;
+    // }
 }
