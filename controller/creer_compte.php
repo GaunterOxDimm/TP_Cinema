@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
             $userAdded = $userDao->add($newUser);
             if ($userAdded) {
                 $added = "L'utilisateur a bien été ajouté";
-                echo $twig->render('films.html.twig', ['added' => $added]);
+                echo $twig->render('search.html.twig', ['added' => $added]);
             } else {
                 $addErr = "Probème d'Ajout utilisateur";
                 echo $twig->render('creer_compte.html.twig', ['addErr' => $addErr]);

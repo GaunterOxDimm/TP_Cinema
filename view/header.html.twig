@@ -13,8 +13,10 @@
   <body>
 
   <!--************************************** HEADER *******************************-->
+  {% block header %}
+  {% if login is defined %}
   <header>
-          
+           
         <nav class="navbar navbar-expand-lg" id="nav">
                 <div class="container-fluid">
                         <a class="navbar-brand" href="films">Médiathèque</a>
@@ -34,10 +36,23 @@
                                         </li>
                                 </ul>
                         </div>
-                        <div id="email" class="text-primary">{{ emailing }}</div>
+                        {% if login is defined %} 
+                                <div>
+                                        <div id="email" class="text-primary"> {{ login }} </div>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                 <div id="signout" class="text-success">
+                                        <a class="nav-link text-danger" href="signout" name="sign_out"> Sign out </a>
+                                </div>
+                        {% endif %}
                 </div>
         </nav>
+       
   </header>
+   {% endif %}
+{% endblock %}
+
+ 
      <!--************************************** CAROUSEL *******************************-->
 
       {# <div class="container-fluid d-flex col-12">
@@ -89,7 +104,7 @@
           <div class="container col-4">Jointure SQL Description
           <div> #}
         
-<br>
+
           <!--************************************** INTERFACE RECHERCHE *******************************-->
         {# <div class="alert alert-secondary" role="alert">
                 <h2>Rechercher un film</h2>
@@ -109,8 +124,8 @@
         
 
             <!--************************************** CRÉEZ VOTRE COMPTE *******************************-->
-        <br>
-            {# <div class="container-fluid">
+        {# <br>
+            <div class="container-fluid">
                 <div class="alert alert-secondary" role="alert">
                         <h2>Créez votre compte</h2>
                         <br>
@@ -135,4 +150,4 @@
                                 </div>
                         </form>
                 </div>
-        </div> #}
+        </div>  #}

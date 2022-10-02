@@ -1,7 +1,10 @@
-<!--************************************** CAROUSEL *******************************-->
+{# <!--************************************** CAROUSEL *******************************--> #}
 
-{{added}}
-        
+
+{% if login is defined %}
+{{ block("header", "header.html.twig") }}
+{% endif %}
+{% block carousel %}
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -70,9 +73,9 @@
             
         </div>
 </div>
-
- 
-                                        <!--************************************** FORMULAIRE NON FONCTIONNEL *******************************-->
+{% endblock %}
+ {# {% endif %} #}
+                                        {# <!--************************************** FORMULAIRE NON FONCTIONNEL *******************************--> #}
 
 
         
@@ -100,7 +103,7 @@
          #}
 
 
-<!--************************************** CAROUSEL NOIR *******************************-->
+{# <!--************************************** CAROUSEL NOIR *******************************--> #}
 
 {# <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -143,7 +146,7 @@
 
 
 
-                <!--************************************** CAROUSEL NOIR *******************************-->
+                {# <!--************************************** CAROUSEL NOIR *******************************--> #}
 
 {# <div class="container-fluid d-flex col-12">
 
@@ -168,7 +171,7 @@
                           
                 </div>
                  <br> #}
-                 <!--************************************** FORMULAIRE FONCTIONNEL *******************************-->
+                 {# <!--************************************** FORMULAIRE FONCTIONNEL *******************************--> #}
 
                 {# <form action="films" method="POST">
                          <div class="container col-10">
@@ -179,7 +182,7 @@
                         </div>
                 </form> #}
 
-                <!--************************************** FORMULAIRE NON FONCTIONNEL *******************************-->
+                {# <!--************************************** FORMULAIRE NON FONCTIONNEL *******************************--> #}
 
                 
                         {# <div class="container col-10">
