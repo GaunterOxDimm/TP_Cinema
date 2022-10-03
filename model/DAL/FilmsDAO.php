@@ -38,16 +38,34 @@ class FilmsDAO extends Dao
     //Ajouter un film
     public function add($data)
     {
-
-        $valeurs = ['titre' => $data->get_titre(), 'realisateur' => $data->get_realisateur()];
-        $requete = 'INSERT INTO films (titre, realisateur) VALUES (:titre , :realisateur)';
-        $insert = $this->_bdd->prepare($requete);
-        if (!$insert->execute($valeurs)) {
-            //print_r($insert->errorInfo());
+        $valeursFilms = ['titre' => $data->get_titre(), 'realisateur' => $data->get_realisateur(), 'affiche' => $data->get_affiche(), 'annee' => $data->get_annee()];
+        // $valeursActeurs = ['nom' => $data->get_nom(), 'prenom' => $data->get_prenom()];
+        // $valeursRoles = ['idActeur' => $data->get_idActeur(), 'idFilm' => $data->get_idFilm(), 'personnage' => $data->get_personnage()];
+        $requeteFilms = 'INSERT INTO films (titre, realisateur, affiche, annee) VALUES (:titre , :realisateur, :affiche, :annee)';
+        var_dump($requeteFilms);
+        // $requeteActeurs = 'INSERT INTO acteurs (nom, prenom) VALUES (:nom , :prenom)';
+        // $requeteRoles = 'INSERT INTO role (idActeur, idFilm, personnage) VALUES (:idActeur, :idFilm, :personnage)';
+        $insertFilms = $this->_bdd->prepare($requeteFilms);
+        // $insertActeurs = $this->_bdd->prepare($requeteActeurs);
+        // $insertRoles = $this->_bdd->prepare($requeteRoles);
+        if (!$insertFilms->execute($valeursFilms)) {
+            print_r($insertFilms->errorInfo());
             return false;
         } else {
             return true;
         }
+        // if (!$insertActeurs->execute($valeursActeurs)) {
+        //     print_r($insertActeurs->errorInfo());
+        //     return false;
+        // } else {
+        //     return true;
+        // }
+        // if (!$insertRoles->execute($valeursRoles)) {
+        //     print_r($insertRoles->errorInfo());
+        //     return false;
+        // } else {
+        //     return true;
+        // }
     }
 
     //Récupérer plus d'info sur 1 film

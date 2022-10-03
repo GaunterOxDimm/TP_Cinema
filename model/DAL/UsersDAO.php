@@ -60,8 +60,6 @@ class UsersDAO extends Dao
     }
 
 
-
-
     //supprimer un user
     public function delete($idUser)
     {

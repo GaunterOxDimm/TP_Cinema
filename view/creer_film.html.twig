@@ -1,19 +1,61 @@
-{% if status is not defined %}
-<div>
-  <form action="creer_film" method='POST' >
-     Titre : <input type='text' name='titre'>
-     Realisateur : <input type='text' name='realisateur'>
-         <input type='submit' value='Ajouter'/>
-  </form>
-
- {% else %}
+{{ reponse }}
+<div class="container col-7">
+    <div class="card text-center">
+      <div class="card-header">
+        Créer un film
+      </div>
+      <div class="card-body">
+        <form class="row g-3" action="creer_film" method="post">
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Titre" name="titre">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Réalisateur</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Réalisateur" name="realisateur">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Affiche</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Affiche" name="affiche">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label">Année</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Année" name="annee">
+            </div>
+            <label for="inputCity" class="form-label text-center">Acteurs</label>
+            <div class="col-12 d-flex">
+                
+                <div class="col-md-4">
+                    <label for="inputCity" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="Nom" name="nom">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputCity" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="Prénom" name="prenom">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputCity" class="form-label">Personnage</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="Personnage" name="personnage">
+                </div>
+                
+            </div>
+           
+                <div class="col-md-4">
+                        <label for="inputCity" class="form-label">idActeur</label>
+                        <input type="text" class="form-control" id="inputCity" placeholder="idActeur" name="idActeur">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputCity" class="form-label">idFilm</label>
+                        <input type="text" class="form-control" id="inputCity" placeholder="idFilm" name="idFilm">
+                </div>
  
-<p>{{status}} :</p>
-
-{% if creerf is defined %}
-     {{creerf.get_titre}} :
-     {{creerf.get_realisateur}}
-{% endif %}
-
-{% endif %}
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" name="button">Enregistrer</button>
+            </div>
+        </form>
+      </div>
+      <div class="card-footer text-muted">
+        Le film sera ajouté à la base de donnée.
+      </div>
+    </div>
 </div>

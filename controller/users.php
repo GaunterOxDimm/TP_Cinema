@@ -8,11 +8,13 @@ $erreur = "";
 //On appelle la fonction getAll()
 $usersDao = new UsersDAO();
 
-if (isset($_POST['submit'])) { // Vérifier si l'utilisateur a appuyé sur le bouton submit (Sign in) et que $_SESSION est vide
+if (isset($_POST['submit'])) { // Vérifier si l'utilisateur a appuyé sur le bouton submit (Sign in)
     $login = $_POST['email']; // aaa@a.fr - test
-    $pass = $_POST['password']; // 123 - test
+    $pass = $_POST['password'];
+    // 123 - test
     if (isset($login) && isset($pass)) { // Checker si les logins et les mots de passes sont renseignés
-        $connexion = $usersDao->getAll($login); // Récuperer toutes les lignes utilisateurs dans la table user de la bdd
+        $connexion = $usersDao->getAll($login);
+        // Récuperer toutes les lignes utilisateurs dans la table user de la bdd
         // print_r($connexion);
         // print_r($connexion[0]->get_email());
         for ($i = 0; $i < count($connexion); $i++) { // Boucler dans le tableau d'objets $connexion
@@ -22,11 +24,13 @@ if (isset($_POST['submit'])) { // Vérifier si l'utilisateur a appuyé sur le bo
                     echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
                 } else if ($pass == $connexion[$i]->get_password()) {
                     $_SESSION['login'] = $login;
-                    echo $twig->render('films.html.twig', ['login' => $_SESSION['login']]); // Si login et password ok, afficher la page carousel films.html.twig
+                    echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]); // Si login et password ok, afficher la page carousel films.html.twig
+                    echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]); // Si login et password ok, afficher la page carousel films.html.twig
+                    // Si login et password ok, afficher la page carousel films.html.twig
                     // echo $twig->render(['login' => $login]); // Et afficher email dans le header
                 }
             } else {
-                $erreur = "Erreur sur l'identifiant'";
+                $erreur = "Erreur sur l'identifiant";
                 echo $twig->render('users.html.twig', ['erreur' => $erreur]);
             }
         }

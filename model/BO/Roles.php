@@ -14,21 +14,26 @@
 class Roles
 {
 
-    private $_idRole;
+    private $_idActeur;
+    private $_idFilm;
     private $_personnage;
+    private $_idRole;
     private $_test;
 
-    public function __construct($idRole = null, $personnage = null, $test = null)
+    public function __construct($idActeur, $idFilm, $personnage = null, $idRole = null, $test = null)
     {
+
+        $this->set_personnage($idActeur);
+        $this->set_personnage($idFilm);
+        $this->set_personnage($personnage);
         if (!is_null($idRole)) {
             $this->set_idRole($idRole);
         }
-        $this->set_personnage($personnage);
         $this->set_test($test);
     }
     public function __toString()
     {
-        return $this->_idRole . " " . $this->_personnage . " " . $this->_test;
+        return $this->_idActeur . " " . $this->_idFilm . " " . $this->_personnage  . " " .  $this->_idRole . " " . $this->_test;
     }
     public function get_personnage()
     {
@@ -57,6 +62,10 @@ class Roles
     {
         return $this->_idRole;
     }
+    public function get_idActeur()
+    {
+        return $this->_idActeur;
+    }
 
     /**
      * Set the value of _idRole
@@ -65,5 +74,19 @@ class Roles
     public function set_idRole($_idRole)
     {
         $this->_idRole = $_idRole;
+    }
+
+    public function set_idActeur($_idActeur)
+    {
+        $this->_idActeur = $_idActeur;
+    }
+
+    public function set_idFilm($_idFilm)
+    {
+        $this->_idFilm = $_idFilm;
+    }
+    public function get_idFilm()
+    {
+        return $this->_idFilm;
     }
 }
