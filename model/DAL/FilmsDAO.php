@@ -20,6 +20,7 @@ class FilmsDAO extends Dao
         //On définit la bdd pour la fonction
 
         $query = $this->_bdd->prepare("SELECT DISTINCT * FROM role INNER JOIN films ON role.idFilm = films.idFilm INNER JOIN acteurs ON role.idActeur = acteurs.idActeur WHERE LOWER(films.titre) LIKE :search;");
+        // $query = $this->_bdd->prepare("SELECT DISTINCT * FROM role, films, acteurs WHERE role.idFilm = films.idFilm AND role.idActeur = acteurs.idActeur AND LOWER(films.titre) LIKE :search");
         $query->execute(array(':search' => '%' . strtolower($search) . '%'));
         $films = array();
         $roles = array();
@@ -27,7 +28,7 @@ class FilmsDAO extends Dao
 
         while ($data = $query->fetch()) {
             $films[] = new Films($data['idFilm'], $data['titre'], $data['realisateur'], $data['affiche'], $data['annee']);
-            $roles[] = new Roles($data['idRole'], $data['personnage'], $data['test']);
+            $roles[] = new Roles($data['idActeur'], $data['idFilm'], $data['personnage'], $data['idRole'],  $data['test']);
             $acteurs[] = new Acteurs($data['idActeur'], $data['nom'], $data['prenom']);
             $jointure = array_merge($films, $roles, $acteurs);
             // var_dump($jointure);

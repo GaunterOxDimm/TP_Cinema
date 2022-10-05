@@ -9,26 +9,32 @@ if (isset($_POST['submit'])) {
     $password2 = $_POST['password2'];
     if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
         $emailErr = "Format invalide";
+        echo $twig->render('navbar.html.twig');
         echo $twig->render('creer_compte.html.twig', ['emailErr' => $emailErr]);
     } else {
         if (strlen($password1) < 3) {
             $passErr = "Mot de passe trop court";
+            echo $twig->render('navbar.html.twig');
             echo $twig->render('creer_compte.html.twig', ['passErr' => $passErr]);
         } elseif ($password1 != $password2) {
             $passErr = "Les mots de passe ne correspondent pas";
+            echo $twig->render('navbar.html.twig');
             echo $twig->render('creer_compte.html.twig', ['passErr' => $passErr]);
         } else {
-            $newUser = new Users(NULL, $user, $login, $password2);
+            $newUser = new Users(NULL, $user, $login, $password2); // 
             $userAdded = $userDao->add($newUser);
-            if ($userAdded) {
+            if ($userAdded && isset($_SESSION['login'])) {
                 $added = "L'utilisateur a bien été ajouté";
+                echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);
                 echo $twig->render('search.html.twig', ['added' => $added]);
             } else {
                 $addErr = "Probème d'Ajout utilisateur";
+                echo $twig->render('navbar.html.twig');
                 echo $twig->render('creer_compte.html.twig', ['addErr' => $addErr]);
             }
         }
     }
 } else {
+    echo $twig->render('navbar.html.twig');
     echo $twig->render('creer_compte.html.twig');
 }

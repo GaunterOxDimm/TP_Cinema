@@ -1,32 +1,35 @@
   <!--************************************** FORMULAIRE DE CONNEXION *******************************-->
 
-<br><br><br><br><br><br>
+<br><br><br><br>
 
-<form action="users" method="POST" >
-
-        <div class="card container overflow-hidden" style="width: 18rem;">
-                <div class="card-body gy-5">
-                        <h2 class="card-title ms-3">Connexion</h2>
-                        <div class="form-check">
-                                <input type="text" class="form-control mt-3" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" name="email">
-                                <input type="text" class="form-control mt-2" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password">
-                                {% if erreur == "Erreur sur le mot de passe" %} {{erreur}} {% endif %}
-                                
-                                <input class="form-check-input ms-2" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label mt-2 ms-2" for="defaultCheck1">
-                                Remember me
-                                </label>
-                        </div>
-                        <div class="row" id="connect">
-                                <div class="flexbox" id="sign-in">
-                                        <button class="btn btn-primary p-2 border bg-primary mt-3" name="submit">Sign in</button>
-                                        <a id="creer-compte" href="creer_compte">ou créer un compte</a>
+<div class="container" style="width: 18rem; height: 70vh;">
+        <form action="users" method="POST">
+        
+                <div class="card container overflow-hidden">
+                        <div class="card-body gy-5">
+                                <h2 class="card-title ms-3">Connexion</h2>
+                                <div class="form-check">
+                                        <input type="text" class="form-control mt-3" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" name="email">
+                                        {% if err == "Erreur sur l'identifiant" %} {{err}} {% endif %} 
+                                        <input type="text" class="form-control mt-2" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password">
+                                        {% if erreur == "Erreur sur le mot de passe" %} {{erreur}} {% endif %}
+        
+                                        <input class="form-check-input ms-2" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label mt-2 ms-2" for="defaultCheck1">
+                                        Remember me
+                                        </label>
+                                </div>
+                                <div class="row" id="connect">
+                                        <div class="flexbox" id="sign-in">
+                                                <button class="btn btn-primary p-2 border bg-primary mt-3" name="submit">Sign in</button>
+                                                <a id="creer-compte" href="creer_compte">ou créer un compte</a>
+                                        </div>
                                 </div>
                         </div>
                 </div>
-        </div>
-
-</form>
+        
+        </form>
+</div>
 
 
 

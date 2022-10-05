@@ -1,19 +1,33 @@
 <?php
+var_dump($_SESSION);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+if (empty($_SESSION)) {
 
+    if (isset($_POST['submit'])) {
 
-$erreur = "";
-//On appelle la fonction getAll()
-$usersDao = new UsersDAO();
+        $erreur = "";
+        $usersDao = new UsersDAO();
+        // Vérifier si l'utilisateur a appuyé sur le bouton submit (Sign in)
+        $login = $_POST['email']; // aaa@a.fr - test
+        $pass = $_POST['password'];
+        // 123 - test
+        // Checker si les logins et les mots de passes sont renseignés
+        $connexion = $usersDao->getAll($login); //On appelle la fonction getAll()
 
-if (isset($_POST['submit'])) { // Vérifier si l'utilisateur a appuyé sur le bouton submit (Sign in)
-    $login = $_POST['email']; // aaa@a.fr - test
-    $pass = $_POST['password'];
-    // 123 - test
-    if (isset($login) && isset($pass)) { // Checker si les logins et les mots de passes sont renseignés
-        $connexion = $usersDao->getAll($login);
+        // if (array_key_exists($login, $connexion)) {
+        //     if ($connexion[$pass] == $pass) {
+        //         $_SESSION['login'] = $login;
+        //         echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]);
+        //     } else {
+        //         $erreur = "Erreur sur le mot de passe";
+        //         echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
+        //     }
+        // } else {
+        //     $erreur = "Erreur sur l'id";
+        //     echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
+        // }
         // Récuperer toutes les lignes utilisateurs dans la table user de la bdd
         // print_r($connexion);
         // print_r($connexion[0]->get_email());
@@ -21,21 +35,18 @@ if (isset($_POST['submit'])) { // Vérifier si l'utilisateur a appuyé sur le bo
             if ($login == $connexion[$i]->get_email()) { // Vérifier si le login / email entré correspond à un email dans la bdd
                 if ($pass != $connexion[$i]->get_password()) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd
                     $erreur = "Erreur sur le mot de passe";
+                    echo $twig->render('navbar.html.twig');
                     echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
                 } else if ($pass == $connexion[$i]->get_password()) {
                     $_SESSION['login'] = $login;
-                    echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]); // Si login et password ok, afficher la page carousel films.html.twig
-                    echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]); // Si login et password ok, afficher la page carousel films.html.twig
-                    // Si login et password ok, afficher la page carousel films.html.twig
-                    // echo $twig->render(['login' => $login]); // Et afficher email dans le header
+                    echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);
+                    echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]);
                 }
-            } else {
-                $erreur = "Erreur sur l'identifiant";
-                echo $twig->render('users.html.twig', ['erreur' => $erreur]);
             }
         }
     }
-    // $usersNumber = count($connexion); // compte le nombre d'entrées du tableau, càdire le nb d'utilisateurs existants dans la bdd
 } else {
-    echo $twig->render('users.html.twig');
+    $_SESSION['login'] = $login;
+    echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);
+    echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]);
 }
