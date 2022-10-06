@@ -23,6 +23,7 @@ if (isset($_POST['submit'])) {
         } else {
             $newUser = new Users(NULL, $user, $login, $password2); // 
             $userAdded = $userDao->add($newUser);
+            $_SESSION['login'] = $login;
             if ($userAdded && isset($_SESSION['login'])) {
                 $added = "L'utilisateur a bien été ajouté";
                 echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);

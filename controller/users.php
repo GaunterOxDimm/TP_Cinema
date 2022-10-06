@@ -46,7 +46,7 @@ if (empty($_SESSION)) {
         }
     }
 } else {
-    $_SESSION['login'] = $login;
+
     echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);
     echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]);
 }
