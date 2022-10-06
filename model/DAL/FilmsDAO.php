@@ -37,37 +37,63 @@ class FilmsDAO extends Dao
     }
 
     //Ajouter un film
-    public function add($data)
+    public function add($data1, $data2, $data3)
     {
-        $valeursFilms = ['titre' => $data->get_titre(), 'realisateur' => $data->get_realisateur(), 'affiche' => $data->get_affiche(), 'annee' => $data->get_annee()];
-        // $valeursActeurs = ['nom' => $data->get_nom(), 'prenom' => $data->get_prenom()];
-        // $valeursRoles = ['idActeur' => $data->get_idActeur(), 'idFilm' => $data->get_idFilm(), 'personnage' => $data->get_personnage()];
-        $requeteFilms = 'INSERT INTO films (titre, realisateur, affiche, annee) VALUES (:titre , :realisateur, :affiche, :annee)';
-        var_dump($requeteFilms);
-        // $requeteActeurs = 'INSERT INTO acteurs (nom, prenom) VALUES (:nom , :prenom)';
-        // $requeteRoles = 'INSERT INTO role (idActeur, idFilm, personnage) VALUES (:idActeur, :idFilm, :personnage)';
+        // ****************************  INSERT FILM ET ACTEUR *************************************
+
+        $valeursFilms = ['titre' => $data1->get_titre(), 'realisateur' => $data1->get_realisateur(), 'affiche' => $data1->get_affiche(), 'annee' => $data1->get_annee()];
+        $requeteFilms = "INSERT INTO films (titre, realisateur, affiche, annee) VALUES (:titre, :realisateur, :affiche, :annee)";
         $insertFilms = $this->_bdd->prepare($requeteFilms);
-        // $insertActeurs = $this->_bdd->prepare($requeteActeurs);
-        // $insertRoles = $this->_bdd->prepare($requeteRoles);
+
         if (!$insertFilms->execute($valeursFilms)) {
-            print_r($insertFilms->errorInfo());
-            return false;
+            echo "ERREUR - IMPOSSIBLE D'AJOUTER les films DANS cinema.films";
         } else {
-            return true;
+            $valeursActeur = ['nom' => $data2->get_nom(), 'prenom' => $data2->get_prenom()];
+            $requeteActeurs = "INSERT INTO acteurs (nom, prenom) VALUES (:nom, :prenom)";
+            $insertActeur = $this->_bdd->prepare($requeteActeurs);
+            if (!$insertActeur->execute($valeursActeur)) {
+                echo "ERREUR - IMPOSSIBLE D'AJOUTER les acteurs DANS cinema.acteurs";
+            } else {
+
+                // ***********************  REQUÊTES idActeur *******************************
+
+                $nom = $data2->get_nom();
+                $requeteIdActeur = "SELECT idActeur FROM acteurs AS a WHERE a.nom = :nom";
+                $queryIdActeur = $this->_bdd->prepare($requeteIdActeur);
+                $queryIdActeur->execute(array(':nom' => $nom));
+                $newidActeurQuery = array();
+                while ($idActeur = $queryIdActeur->fetch()) {
+                    $newidActeurQuery[] = new Acteurs($idActeur['idActeur']);
+
+                    //************************  REQUÊTE idFilm  **********************************
+
+                    $titre = $data1->get_titre();
+                    $requeteIdFilm = "SELECT idFilm FROM films AS f WHERE f.titre = :titre";
+                    $queryIdFilms = $this->_bdd->prepare($requeteIdFilm);
+                    $queryIdFilms->execute(array(':titre' => $titre));
+                    $newidFilmQuery = array();
+                    while ($idFilm = $queryIdFilms->fetch()) {
+                        $newidFilmQuery[] = new Films($idFilm['idFilm']);
+                        $iDs = array_merge($newidActeurQuery, $newidFilmQuery); //return $iDs; // Retourne un array avaec idActeur et idFilm
+
+                        // ****************************  INSERT PERSONNAGE EN FONCTION DES IDs (DANS ROLE)  *************************************
+
+                        $valeursRole = ['idActeur' => $iDs[0]->get_idActeur(), 'idFilm' => $iDs[1]->get_idFilm(), 'personnage' => $data3->get_personnage()];
+                        $requeteRole = "INSERT INTO role (idActeur, idFilm, personnage) VALUES (:idActeur, :idFilm, :personnage)";
+                        $insertRole = $this->_bdd->prepare($requeteRole);
+                        if (!$insertRole->execute($valeursRole)) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+            }
         }
-        // if (!$insertActeurs->execute($valeursActeurs)) {
-        //     print_r($insertActeurs->errorInfo());
-        //     return false;
-        // } else {
-        //     return true;
-        // }
-        // if (!$insertRoles->execute($valeursRoles)) {
-        //     print_r($insertRoles->errorInfo());
-        //     return false;
-        // } else {
-        //     return true;
-        // }
     }
+
+
+
 
     //Récupérer plus d'info sur 1 film
 

@@ -7,13 +7,13 @@
 
         <div class="carousel-indicators">
         {% for film in allfilms %}
-                <button type="button" data-bs-target="#carouselExampleDark" data-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-slide-to="{{ loop.index }}" {% if loop.index == 1 %} class="active" {% endif %} aria-current="true" aria-label="Slide 1"></button>
         {% endfor %}
         </div>
         
         <div class="carousel-inner"> 
         {% for film in allfilms %}    
-                 <div {% if loop.index0 == 0 %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}> 
+                 <div {% if loop.index == 1 %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}> 
                          <img src="{{film.get_affiche}}" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                                 <h5>"{{film.get_titre}}"</h5>

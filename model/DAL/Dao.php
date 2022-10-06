@@ -36,7 +36,7 @@ abstract class Dao
     abstract public function getOne($id);
 
     //Ajouter un item
-    abstract public function add($data);
+    abstract public function add($data1, $data2, $data3);
 
     public function set_bdd($_bdd)
     {

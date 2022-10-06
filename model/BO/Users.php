@@ -19,7 +19,7 @@ class Users
     private $_email;
     private $_password;
 
-    public function __construct($idUser = null, $userName = null, $email = null, $password = null)
+    public function __construct($idUser = NULL, $userName = NULL, $email = NULL, $password = NULL)
     {
         if (!is_null($idUser)) {
             $this->set_idUser($idUser);
@@ -47,11 +47,13 @@ class Users
     public function set_userName($_userName)
     {
         $this->_userName = $_userName;
+        return $this;
     }
 
     public function set_email($_email)
     {
         $this->_email = $_email;
+        return $this;
     }
 
     /**
@@ -69,6 +71,8 @@ class Users
     public function set_idUser($_idUser)
     {
         $this->_idUser = $_idUser;
+
+        return $this;
     }
 
     /**

@@ -20,11 +20,11 @@ class Roles
     private $_idRole;
     private $_test;
 
-    public function __construct($idActeur, $idFilm, $personnage = null, $idRole = null, $test = null)
+    public function __construct($idActeur = NULL, $idFilm = NULL, $personnage = NULL, $idRole = NULL, $test = NULL)
     {
 
-        $this->set_personnage($idActeur);
-        $this->set_personnage($idFilm);
+        $this->set_idActeur($idActeur);
+        $this->set_idFilm($idFilm);
         $this->set_personnage($personnage);
         if (!is_null($idRole)) {
             $this->set_idRole($idRole);
@@ -48,11 +48,14 @@ class Roles
     public function set_personnage($_personnage)
     {
         $this->_personnage = $_personnage;
+        return $this;
     }
 
     public function set_test($_test)
     {
         $this->_test = $_test;
+
+        return $this;
     }
 
     /**
@@ -74,16 +77,22 @@ class Roles
     public function set_idRole($_idRole)
     {
         $this->_idRole = $_idRole;
+
+        return $this;
     }
 
     public function set_idActeur($_idActeur)
     {
         $this->_idActeur = $_idActeur;
+
+        return $this;
     }
 
     public function set_idFilm($_idFilm)
     {
         $this->_idFilm = $_idFilm;
+
+        return $this;
     }
     public function get_idFilm()
     {
