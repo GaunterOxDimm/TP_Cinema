@@ -47,10 +47,11 @@ class UsersDAO extends Dao
     //Ajouter un user
     public function add($data1, $data2 = NULL, $data3 = NULL)
     {
-        // password_hash();
-        // password_verify();
-        // fonction de hashage avant de mettre dans la base de données
-        $valeurs = ['idUser' => $data1->get_idUser(), 'userName' => $data1->get_userName(), 'email' => $data1->get_email(), 'password' => $data1->get_password()];
+        $hashedPass = password_hash($data1->get_password(), PASSWORD_DEFAULT);
+        $passSuccess = password_verify($data1->get_password(), $hashedPass);  // fonction de hashage avant de mettre le MDP dans la base de données
+
+
+        $valeurs = ['idUser' => $data1->get_idUser(), 'userName' => $data1->get_userName(), 'email' => $data1->get_email(), 'password' => $passSuccess];
         $requete = 'INSERT INTO user (idUser, userName, email, password) VALUES (:idUser, :userName , :email, :password)';
         $insert = $this->_bdd->prepare($requete);
         if (!$insert->execute($valeurs)) {
