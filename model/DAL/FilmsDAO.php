@@ -74,7 +74,7 @@ class FilmsDAO extends Dao
                     $newidFilmQuery = array();
                     while ($idFilm = $queryIdFilms->fetch()) {
                         $newidFilmQuery[] = new Films($idFilm['idFilm']);
-                        $iDs = array_merge($newidActeurQuery, $newidFilmQuery); //return $iDs; // Retourne un array avaec idActeur et idFilm
+                        $iDs = array_merge($newidActeurQuery, $newidFilmQuery); //return $iDs; // Retourne un array avec idActeur et idFilm
 
                         // ****************************  INSERT PERSONNAGE EN FONCTION DES IDs (DANS ROLE)  *************************************
 
