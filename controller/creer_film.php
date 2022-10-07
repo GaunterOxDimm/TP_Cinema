@@ -9,13 +9,14 @@ if (!empty($_SESSION['login'])) {
         $nomC = $_POST['nom'];
         $prenomC = $_POST['prenom'];
         $personnageC = $_POST['personnage'];
+        $testC = $_POST['test'];
 
         if (isset($titreC) && isset($realisateurC) && isset($afficheC) && isset($anneeC) && isset($nomC) && isset($prenomC) && isset($personnageC)) //&& isset($nomC) && isset($prenomC) && isset($idActeurC) && isset($idFilmC) && isset($personnageC) 
         {
             $filmsdao = new FilmsDAO();
             $createFilm = new Films($idFilm = NULL, $titreC, $realisateurC, $afficheC, $anneeC);
             $createActeur = new Acteurs($idActeur = NULL, $nomC, $prenomC);
-            $createRole = new Roles($idActeur = NULL, $idFilm = NULL, $personnageC, $idRole = NULL, $test = NULL);
+            $createRole = new Roles($idActeur = NULL, $idFilm = NULL, $personnageC, $idRole = NULL, $testC);
             $status = $filmsdao->add($createFilm, $createActeur, $createRole);
             if ($status) {
                 echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);

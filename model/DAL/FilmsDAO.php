@@ -78,8 +78,8 @@ class FilmsDAO extends Dao
 
                         // ****************************  INSERT PERSONNAGE EN FONCTION DES IDs (DANS ROLE)  *************************************
 
-                        $valeursRole = ['idActeur' => $iDs[0]->get_idActeur(), 'idFilm' => $iDs[1]->get_idFilm(), 'personnage' => $data3->get_personnage()];
-                        $requeteRole = "INSERT INTO role (idActeur, idFilm, personnage) VALUES (:idActeur, :idFilm, :personnage)";
+                        $valeursRole = ['idActeur' => $iDs[0]->get_idActeur(), 'idFilm' => $iDs[1]->get_idFilm(), 'personnage' => $data3->get_personnage(), 'test' => $data3->get_test()];
+                        $requeteRole = "INSERT INTO role (idActeur, idFilm, personnage, test) VALUES (:idActeur, :idFilm, :personnage, :test)";
                         $insertRole = $this->_bdd->prepare($requeteRole);
                         if (!$insertRole->execute($valeursRole)) {
                             return false;
