@@ -27,3 +27,6 @@ h2 {
 .navbar-toggler-icon {
   background-color: aliceblue;
 }
+.account-creation-error {
+  color: red;
+}

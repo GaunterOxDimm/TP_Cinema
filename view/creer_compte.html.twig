@@ -10,20 +10,20 @@
                         <div class="col-auto">
                                 <label for="email" class="ms-1">Adresse mail</label>
                                 <input type="text" class="form-control" id="sign-up-mail" placeholder="Email adresse" name="login">
-                                {% if emailErr == "Format invalide" %} {{emailErr}} {% endif %}
+                                <div class="account-creation-error">{% if emailErr == "Format invalide" %} {{emailErr}} {% endif %}</div>
                                 
                         </div>
                         <br>
                         <div class="col-auto">
                                 <label for="password" class="ms-1">Mot de passe</label>
                                 <input type="password" class="form-control" id="account-password" placeholder="password" name="password1">
-                                {{passErr}}
+                                <div class="account-creation-error">{{passErr}}</div>
                         </div>
                         <br>
                         <div class="col-auto">
                                 <label for="rewrite password" class="ms-1">Saisir à nouveau votre mot de passe</label>
                                 <input type="password" class="form-control" id="rewrite" placeholder="rewrite password" name="password2">
-                                {% if passErr == "Les mots de passe ne correspondent pas" %} {{passErr}} {% endif %}
+                                <div class="account-creation-error">{% if passErr == "Les mots de passe ne correspondent pas" %} {{passErr}} {% endif %}</div>
                                 
                         </div>
                         <br>
