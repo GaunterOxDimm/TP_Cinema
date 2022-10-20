@@ -1,8 +1,25 @@
 {# <!--************************************** CAROUSEL *******************************--> #}
 
 
-        
-   
+        <div class="alert alert-secondary" role="alert">
+
+                <h2>Rechercher un film</h2>
+                <p>Saisir un mot du titre</p>
+                <br>
+                <form action="films" method="post" class="row g-3">
+                        <div class="col-auto">
+                                <label for="inputPassword2" class="visually-hidden">Search</label>
+                                <input name="search" type="text" class="form-control" id="inputPassword2" placeholder="Search">
+                        </div>
+                        <div class="col-auto">
+                                <button type="submit" class="btn btn-secondary mb-3">Rechercher</button>
+                        </div>
+                </form>        
+        </div>
+<br>
+{% if error is defined %} <h3>{{ error }}</h3>{% endif %}
+
+
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 
         <div class="carousel-indicators">
@@ -23,11 +40,11 @@
         {% endfor %} 
         </div>
         
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev" {% if error is defined %} hidden=true {% endif %}>
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next" {% if error is defined %} hidden=true {% endif %}>
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
         </button>

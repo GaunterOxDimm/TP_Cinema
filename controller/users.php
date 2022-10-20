@@ -1,10 +1,12 @@
 <?php
 var_dump($_SESSION);
+
 if (session_status() === PHP_SESSION_NONE) {
+
     session_start();
 }
 if (empty($_SESSION)) {
-
+    echo $twig->render('users.html.twig');
     if (isset($_POST['submit'])) {
 
         $erreur = "";
@@ -35,18 +37,15 @@ if (empty($_SESSION)) {
             if ($login == $connexion[$i]->get_email()) { // Vérifier si le login / email entré correspond à un email dans la bdd
                 if ($pass != $connexion[$i]->get_password()) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd
                     $erreur = "Erreur sur le mot de passe";
-                    echo $twig->render('navbar.html.twig');
                     echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
                 } else if ($pass == $connexion[$i]->get_password()) {
                     $_SESSION['login'] = $login;
-                    echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);
-                    echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]);
+                    header('Location: films');
                 }
             }
         }
     }
 } else {
-
-    echo $twig->render('navbar.html.twig', ['login' => $_SESSION['login']]);
-    echo $twig->render('search.html.twig', ['login' => $_SESSION['login']]);
+    $_SESSION['login'] = $login;
+    header('Location: films');
 }
