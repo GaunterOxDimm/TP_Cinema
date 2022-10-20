@@ -1,13 +1,9 @@
 <?php
 var_dump($_SESSION);
 
-if (session_status() === PHP_SESSION_NONE) {
-
-    session_start();
-}
-if (empty($_SESSION)) {
+if (!isset($_SESSION['login'])) {
     echo $twig->render('users.html.twig');
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['password'])) {
 
         $erreur = "";
         $usersDao = new UsersDAO();
@@ -38,7 +34,8 @@ if (empty($_SESSION)) {
                 if ($pass != $connexion[$i]->get_password()) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd
                     $erreur = "Erreur sur le mot de passe";
                     echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
-                } else if ($pass == $connexion[$i]->get_password()) {
+                } else if ($pass == $passSuccess = password_verify($data1->get_password(), $hashedPass);  // fonction de hashage avant de mettre le MDP dans la base de données
+) {
                     $_SESSION['login'] = $login;
                     header('Location: films');
                 }

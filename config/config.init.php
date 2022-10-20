@@ -20,5 +20,6 @@ $loader = new \Twig\Loader\FilesystemLoader('view');
 
 // Instantiate our Twig
 $twig = new \Twig\Environment($loader);
+$twig->addGlobal('session', $_SESSION);
 
 Autoloader::register();

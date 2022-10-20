@@ -15,7 +15,7 @@ class FilmsDAO extends Dao
 {
 
     //Récupérer toutes les Films
-    public function getAll($search)
+    public function getAll($search) // Tr
     {
         //On définit la bdd pour la fonction
         $jointure = array();

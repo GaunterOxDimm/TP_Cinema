@@ -19,9 +19,12 @@ class Films
     private $_realisateur;
     private $_affiche;
     private $_annee;
-    // private $_roles = array();
-    // private $_acteurs = array();
-
+    private $_roles = array();
+    // faire une méthode addrole() et ajouter une méthode dans le film
+    // public function add_role($role)
+    // {
+    //     $this->_roles[] = $role;
+    // }
 
 
     public function __construct($idFilm = null, $titre = null, $realisateur = null, $affiche = null, $annee = null)
@@ -33,7 +36,7 @@ class Films
         $this->set_realisateur($realisateur);
         $this->set_affiche($affiche);
         $this->set_annee($annee);
-        // $this->set_roles($roles);
+        $this->set_roles($roles);
         // $this->set_acteurs($acteurs);
     }
     public function __toString()
