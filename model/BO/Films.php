@@ -20,7 +20,7 @@ class Films
     private $_affiche;
     private $_annee;
     private $_roles = array();
-    // faire une méthode addrole() et ajouter une méthode dans le film
+    // faire une méthode addrole() et ajouter une méthode dans le film
     // public function add_role($role)
     // {
     //     $this->_roles[] = $role;
@@ -36,7 +36,7 @@ class Films
         $this->set_realisateur($realisateur);
         $this->set_affiche($affiche);
         $this->set_annee($annee);
-        $this->set_roles($roles);
+        // $this->set_roles($roles);
         // $this->set_acteurs($acteurs);
     }
     public function __toString()

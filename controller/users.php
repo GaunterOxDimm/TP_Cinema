@@ -10,6 +10,7 @@ if (!isset($_SESSION['login'])) {
         // Vérifier si l'utilisateur a appuyé sur le bouton submit (Sign in)
         $login = $_POST['email']; // aaa@a.fr - test
         $pass = $_POST['password'];
+
         // 123 - test
         // Checker si les logins et les mots de passes sont renseignés
         $connexion = $usersDao->getAll($login); //On appelle la fonction getAll()
@@ -29,13 +30,13 @@ if (!isset($_SESSION['login'])) {
         // Récuperer toutes les lignes utilisateurs dans la table user de la bdd
         // print_r($connexion);
         // print_r($connexion[0]->get_email());
-        for ($i = 0; $i < count($connexion); $i++) { // Boucler dans le tableau d'objets $connexion
+        for ($i = 0; $i < count($connexion); $i++) {
+            $passSuccess = password_verify($pass, $connexion[$i]->get_password()); // Boucler dans le tableau d'objets $connexion
             if ($login == $connexion[$i]->get_email()) { // Vérifier si le login / email entré correspond à un email dans la bdd
-                if ($pass != $connexion[$i]->get_password()) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd
+                if ($pass != $passSuccess) { // Vérifier si le mot de passe entré correspond au mot de passe de la bdd
                     $erreur = "Erreur sur le mot de passe";
                     echo $twig->render('users.html.twig', ['erreur' => $erreur]); // erreur s'il ne correspond pas
-                } else if ($pass == $passSuccess = password_verify($data1->get_password(), $hashedPass);  // fonction de hashage avant de mettre le MDP dans la base de données
-) {
+                } else if ($pass == $passSuccess) {
                     $_SESSION['login'] = $login;
                     header('Location: films');
                 }
